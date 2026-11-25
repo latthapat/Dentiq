@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PureSmile - แปรงสีฟันเพื่อสุขภาพเหงือกและฟัน</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-sm sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-teal-600">PureSmile</h1>
+      <a href="admin.html" class="text-sm text-slate-500 hover:text-teal-600 underline">สำหรับเจ้าหน้าที่แพ็คสินค้า &rarr;</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-teal-600 text-white py-14 px-4 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-3">สัมผัสใหม่ของการแปรงฟันที่อ่อนโยนกว่าเดิม</h2>
+    <p class="text-teal-100 max-w-xl mx-auto">ออกแบบตามหลักสรีรศาสตร์ ขนแปรงนุ่มละเอียด ลดการเกิดคราบพลัค พร้อมส่งตรงถึงหน้าบ้านคุณ</p>
+  </header>
+
+  <!-- Product SKUs -->
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <h3 class="text-2xl font-bold text-center mb-8">เลือกสูตรแปรงสีฟันที่เหมาะกับคุณ</h3>
+    
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- SKU 1 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden border border-slate-100">
+        <img src="./images/sku1-soft.jpg" alt="แปรงสีฟันขนนุ่มพิเศษ" class="w-full h-64 object-cover bg-slate-200">
+        <div class="p-6">
+          <span class="text-xs font-semibold bg-teal-100 text-teal-800 px-2.5 py-1 rounded">SKU-01 : รุ่นยอดนิยม</span>
+          <h4 class="text-xl font-bold mt-2">PureSmile Ultra-Soft (ขนนุ่มพิเศษ)</h4>
+          <p class="text-slate-600 text-sm mt-2">ขนแปรงเรียวแหลม 0.01 มม. มากกว่า 5,000 เส้น เหมาะสำหรับผู้ที่มีอาการเสียวฟันและเหงือกบอบบาง</p>
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-teal-600">฿89 <span class="text-xs text-slate-400 font-normal">/ ด้าม</span></span>
+            <div class="flex items-center space-x-2">
+              <label class="text-sm font-medium">จำนวน:</label>
+              <input type="number" id="sku1Qty" min="0" value="1" onchange="calculateTotal()" class="w-20 border rounded-lg px-3 py-1.5 text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKU 2 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden border border-slate-100">
+        <img src="./images/sku2-bamboo.jpg" alt="แปรงสีฟันไม้ไผ่รักษ์โลก" class="w-full h-64 object-cover bg-slate-200">
+        <div class="p-6">
+          <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-1 rounded">SKU-02 : รักษ์โลก</span>
+          <h4 class="text-xl font-bold mt-2">PureSmile Eco-Bamboo (ด้ามไม้ไผ่ธรรมชาติ)</h4>
+          <p class="text-slate-600 text-sm mt-2">ผลิตจากไม้ไผ่ธรรมชาติ 100% ย่อยสลายได้ ขนแปรงผสมชาโคลช่วยลดกลิ่นปากและแบคทีเรีย</p>
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-teal-600">฿119 <span class="text-xs text-slate-400 font-normal">/ ด้าม</span></span>
+            <div class="flex items-center space-x-2">
+              <label class="text-sm font-medium">จำนวน:</label>
+              <input type="number" id="sku2Qty" min="0" value="0" onchange="calculateTotal()" class="w-20 border rounded-lg px-3 py-1.5 text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Form -->
+    <div class="bg-white rounded-xl shadow-md p-6 md:p-8 max-w-2xl mx-auto border border-slate-100">
+      <h3 class="text-xl font-bold mb-4 border-b pb-3">ข้อมูลจัดส่งและสรุปคำสั่งซื้อ</h3>
+      
+      <div class="bg-slate-50 p-4 rounded-lg mb-6 flex justify-between items-center">
+        <span class="font-medium">ยอดรวมสุทธิ (ส่งฟรีทั่วไทย):</span>
+        <span id="totalPriceDisplay" class="text-2xl font-bold text-teal-600">฿89</span>
+      </div>
+
+      <form id="orderForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">ชื่อ-นามสกุล ผู้รับ *</label>
+          <input type="text" id="customerName" required placeholder="เช่น นายสมชาย ใจดี" class="w-full border rounded-lg px-4 py-2 focus:outline-teal-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">เบอร์โทรศัพท์ *</label>
+          <input type="tel" id="phone" required placeholder="เช่น 0812345678" class="w-full border rounded-lg px-4 py-2 focus:outline-teal-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">ที่อยู่สำหรับจัดส่งพัสดุ (พร้อมรหัสไปรษณีย์) *</label>
+          <textarea id="address" rows="3" required placeholder="บ้านเลขที่ ถนน ตำบล/แขวง อำเภอ/เขต จังหวัด รหัสไปรษณีย์" class="w-full border rounded-lg px-4 py-2 focus:outline-teal-500"></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-lg transition">
+          ยืนยันการสั่งซื้อ
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL'; // <-- นำ URL จาก Google Apps Script มาใส่ที่นี่
+    const PRICE_SKU1 = 89;
+    const PRICE_SKU2 = 119;
+
+    function calculateTotal() {
+      const q1 = parseInt(document.getElementById('sku1Qty').value) || 0;
+      const q2 = parseInt(document.getElementById('sku2Qty').value) || 0;
+      const total = (q1 * PRICE_SKU1) + (q2 * PRICE_SKU2);
+      document.getElementById('totalPriceDisplay').innerText = '฿' + total.toLocaleString();
+      return total;
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const q1 = parseInt(document.getElementById('sku1Qty').value) || 0;
+      const q2 = parseInt(document.getElementById('sku2Qty').value) || 0;
+
+      if (q1 === 0 && q2 === 0) {
+        alert('กรุณาเลือกสินค้าอย่างน้อย 1 ชิ้นครับ');
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerText = 'กำลังบันทึกคำสั่งซื้อ...';
+
+      const payload = {
+        customerName: document.getElementById('customerName').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        sku1Qty: q1,
+        sku2Qty: q2,
+        totalPrice: calculateTotal()
+      };
+
+      try {
+        const res = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        alert(`สั่งซื้อสำเร็จ! หมายเลขคำสั่งซื้อของคุณคือ: ${result.orderId}`);
+        document.getElementById('orderForm').reset();
+        document.getElementById('sku1Qty').value = 1;
+        document.getElementById('sku2Qty').value = 0;
+        calculateTotal();
+      } catch (err) {
+        alert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'ยืนยันการสั่งซื้อ';
+      }
+    });
+  </script>
+</body>
+</html>
